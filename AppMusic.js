@@ -7,10 +7,8 @@ import {
 } from 'react-native';
 import { Audio } from 'expo-av'
 import Slider from '@react-native-community/slider'
-import { FontAwesome5 } from '@expo/vector-icons'
+import { FontAwesome5,Ionicons } from '@expo/vector-icons'
 import DocumentPicker from 'react-native-document-picker'
-import GoBack from "./GoBack"
-
 const audioBookPlaylist = [
 	{
 		uri:require('./assets/Hello.mp3'),
@@ -50,7 +48,7 @@ export default class Appsss extends Component {
 			isLoading: true,
 			fontLoaded: false,
 			volume: 1.0,
-            multipleFile:[]
+            
 		};
 	}
 
@@ -166,6 +164,12 @@ export default class Appsss extends Component {
 			this.updatePlaybackInstanceForIndex(this.state.shouldPlay);
 		}
 	};
+	goback = () =>{
+		if (this.playbackInstance != null) {
+			this.props.navigation.goBack('Music')
+			this.updatePlaybackInstanceForIndex(this.state.shouldPlay);
+		}
+	}
 
 	
 
@@ -206,7 +210,9 @@ export default class Appsss extends Component {
 		return (
 			<View style={styles.container}>
 				<View style={{ flex: 1, position: 'absolute', left: 10, top: 10 }}>
-					<GoBack />
+				    <TouchableOpacity onPress={this.goback}>
+                        <Ionicons  name="arrow-back" size={32} color="#FFF" style={{ marginTop: 16 }} />
+                    </TouchableOpacity>
 				</View>
         		<Image
 					style={styles.Cover}
